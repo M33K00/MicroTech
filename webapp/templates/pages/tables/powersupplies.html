@@ -1,0 +1,82 @@
+{% extends 'pages/base.html' %} {% block content %}
+<div class="row">
+  <div class="col-md-10 col-12 mx-auto mt-5">
+    <a href="{% url 'dashboard' %}" class="btn btn-outline-primary"
+      >All Items</a
+    >
+    <a href="{% url 'processors' %}" class="btn btn-outline-primary"
+      >Processors</a
+    >
+    <a href="{% url 'motherboards' %}" class="btn btn-outline-primary"
+      >Motherboards</a
+    >
+    <a href="{% url 'graphicscards' %}" class="btn btn-outline-primary"
+      >Graphics Card</a
+    >
+    <a href="{% url 'rams' %}" class="btn btn-outline-primary">Ram Sticks</a>
+    <a href="{% url 'powersupplies' %}" class="btn btn-primary"
+      >Power Supplies</a
+    >
+
+    <!--table 5 PSU-->
+    <div class="d-flex justify-content-end">
+      <div class="d-flex p-1">
+        <h3><strong>Power Supplies</strong></h3>
+      </div>
+      <div class="d-flex p-1">
+        <a href="{% url 'add-psu' %}" class="btn btn-primary">+</a>
+      </div>
+    </div>
+    <table id="table5" class="table table-hover table-striped">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col" id="Column2">Name</th>
+          <th scope="col">Wattage</th>
+          <th scope="col">Product Code</th>
+          <th scope="col">QTY</th>
+          <th scope="col">Manufacturer</th>
+          <th scope="col">Prod. Supplier</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if items5|length == 0 %}
+        <tr>
+          <th scope="row">-</th>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td></td>
+          <td></td>
+        </tr>
+        {% endif %} {% for item5 in items5 %}
+        <tr>
+          <td>{{ item5.name }}</td>
+          <td>{{ item5.wattage}}</td>
+          <td>{{ item5.productcode }}</td>
+          <td>{{ item5.quantity }}</td>
+          <td>{{ item5.PSUmanufacturer }}</td>
+          <td>{{ item5.supplier }}</td>
+          <td>
+            <a
+              href="{% url 'edit-psu' item5.id %}"
+              class="btn btn-outline-secondary"
+              >Edit</a
+            >
+          </td>
+          <td>
+            <a
+              href="{% url 'delete-psu' item5.id %}"
+              class="btn btn-outline-danger"
+              >Delete</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endblock content %}
+</div>
